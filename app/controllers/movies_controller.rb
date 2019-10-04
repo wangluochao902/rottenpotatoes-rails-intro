@@ -34,7 +34,7 @@ class MoviesController < ApplicationController
     
     if not redirect_params.empty?
       redirect_to movie_path redirect_params
-      
+    end
 
     if params[:sort]
       @movies = Movie.order(params[:sort])
