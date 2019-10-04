@@ -16,29 +16,29 @@ class MoviesController < ApplicationController
     @all_ratings_hash = Hash[@all_ratings.collect { |r| [r, true] }]
 
     # if there are arguments in session and not in params, we need to save them to redirect_params and do redirect
-    redirect_params = Hash.new
-    puts redirect_params, 'hi1'
-    if params[:sort]
-      session[:sort] = params[:sort]
-    elsif session[:sort]:
-      redirect_params[:sort] = session[:sort]
-    end
-    puts redirect_params, 'hi2'
+    # redirect_params = Hash.new
+    puts 'hi1'
+    # if params[:sort]
+    #   session[:sort] = params[:sort]
+    # elsif session[:sort]:
+    #   redirect_params[:sort] = session[:sort]
+    # end
+    # puts 'hi2'
 
-    if params[:ratings]:
-      session[:ratings] = params[:ratings]
-    elsif session[:ratings]
-      redirect_params[:ratings] = session[:ratings]
-    else
-      session[:ratings] = @all_ratings_hash
-      redirect_params[:ratings] = @all_ratings_hash
-    end
-    puts redirect_params, 'hi3'
+    # if params[:ratings]:
+    #   session[:ratings] = params[:ratings]
+    # elsif session[:ratings]
+    #   redirect_params[:ratings] = session[:ratings]
+    # else
+    #   session[:ratings] = @all_ratings_hash
+    #   redirect_params[:ratings] = @all_ratings_hash
+    # end
+    # puts 'hi3'
 
-    if not redirect_params.empty?
-      redirect_to(movie_path redirect_params)
-    end
-    puts redirect_params, 'hi4'
+    # if not redirect_params.empty?
+    #   redirect_to(movie_path redirect_params)
+    # end
+    # puts 'hi4'
 
     if params[:sort]
       @movies = Movie.order(params[:sort])
