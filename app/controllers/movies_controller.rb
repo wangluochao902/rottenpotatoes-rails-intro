@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
     elsif session[:sort]:
       redirect_params[:sort] = session[:sort]
     end
-    puts 'hi2'
+    puts redirect_params
 
     if params[:ratings]:
       session[:ratings] = params[:ratings]
@@ -32,11 +32,11 @@ class MoviesController < ApplicationController
     else
       redirect_params[:ratings] = @all_ratings_hash
     end
-    puts 'hi3'
+    puts redirect_params
 
-    if not redirect_params.empty?
-      redirect_to(movie_path redirect_params)
-    end
+    # if not redirect_params.empty?
+    #   redirect_to(movie_path redirect_params)
+    # end
     puts 'hi4'
 
     if params[:sort]
