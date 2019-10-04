@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
+    @movie = Movie.all
     @all_ratings = Movie.all_ratings
     @all_ratings_hash = Hash[@all_ratings.collect { |r| [r, true] }]
 
