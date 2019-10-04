@@ -15,17 +15,27 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     @all_ratings_hash = Hash[@all_ratings.collect { |r| [r, true] }]
 
-    session[:sort] = params[:sort] if params[:sort] 
-    session[:ratings] = params[:ratings] if params[:ratings] 
-    session[:ratings] = @all_ratings_hash if !session[:ratings]
+    # if there are arguments in session and not in params, we need to save them to redirect_params and do redirect
+    redirect_params = Hash.new
+    if params[:sort]
+      session[:sort] = params[:sort]
+    elsif session[:sort]:
+      redirect_params[:sort] = session[:sort]
+    end
 
-    puts session[:ratings]
+    if params[:ratings]:
+      session[:ratings] = params[:ratings]
+    elsif session[:ratings]
+      redirect_params[:ratings] = session[:ratings]
+    else
+      session[:ratings] = @all_ratings_hash
+      redirect_params[:ratings] = @all_ratings_hash
+    end
+    
+    if not redirect_params.empty?
+      redirect_to movie_path redirect_params
+      
 
-    params[:sort] = session[:sort] if !params[:sort]
-    params[:ratings] = session[:ratings] if !params[:ratings]
-
-    puts params[:ratings]
-    puts params[:sort]
     if params[:sort]
       @movies = Movie.order(params[:sort])
     end
