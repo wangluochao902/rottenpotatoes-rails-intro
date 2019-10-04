@@ -24,6 +24,7 @@ class MoviesController < ApplicationController
     params[:ratings] = session[:ratings] if !params[:ratings]
 
     puts params[:ratings]
+    puts params[:sort]
     if params[:sort]
       @movies = Movie.order(params[:sort])
     end
